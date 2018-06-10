@@ -5,7 +5,7 @@
 <%@ page session="false" %>
 <html>
 <head>
-    <title>Book Page</title>
+    <title>Music Page</title>
 
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/style.css">

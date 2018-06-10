@@ -3,42 +3,228 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib prefix="from" uri="http://www.springframework.org/tags/form" %>
 <%@ page session="false" %>
-<html>
+
+
+<%--<html>--%>
+<%--<head>--%>
+<%--<title>Book Page</title>--%>
+<%--<meta charset="utf-8">--%>
+<%--<link rel="stylesheet" href="dist/css/sb-admin-2.css">--%>
+<%--</head>--%>
+<%--<body>--%>
+<%--<br/>--%>
+
+<%--<h1>Book List</h1>--%>
+
+<%--<c:if test="${!empty listBooks}">--%>
+<%--<table class="tg">--%>
+<%--<tr>--%>
+<%--<th width="80">ID</th>--%>
+<%--<th width="120">Title</th>--%>
+<%--<th width="120">Author</th>--%>
+<%--<th width="120">Price</th>--%>
+<%--<th width="60">Edit</th>--%>
+<%--<th width="60">Delete</th>--%>
+<%--</tr>--%>
+<%--<c:forEach items="${listBooks}" var="book">--%>
+<%--<tr>--%>
+<%--<td>${book.id}</td>--%>
+<%--<td>${book.bookTitle}</td>--%>
+<%--<td>${book.bookAuthor}</td>--%>
+<%--<td>${book.price/100}${book.price%100}</td>--%>
+<%--<td><a href="<c:url value='admin/edit/${book.id}'/>">Edit</a></td>--%>
+<%--<td><a href="<c:url value='admin/remove/${book.id}'/>">Delete</a></td>--%>
+<%--</tr>--%>
+<%--</c:forEach>--%>
+<%--</table>--%>
+<%--</c:if>--%>
+<%--<br/>--%>
+<%--<a href="<c:url value='admin/add'/>">Add a book</a>--%>
+
+<%--</body>--%>
+<%--</html>--%>
+
+
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-    <title>Music Page</title>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="css/style.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Book list</title>
+
+    <!-- Bootstrap Core CSS -->
+    <%--<link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">--%>
+    <link href="<c:url value="/resources/vendor/bootstrap/css/bootstrap.min.css" />" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="<c:url value="/resources/vendor/metisMenu/metisMenu.min.css" />"rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="<c:url value="/resources/dist/css/sb-admin-2.css" />" rel="stylesheet" >
+
+    <!-- DataTables CSS -->
+    <link href="<c:url value="/resources/vendor/datatables-plugins/dataTables.bootstrap.css" />" rel="stylesheet">
+
+    <!-- DataTables Responsive CSS -->
+    <link href="<c:url value="/resources/vendor/datatables-responsive/dataTables.responsive.css" />" rel="stylesheet">
+
+
+    <!-- Custom Fonts -->
+    <link href="<c:url value="/resources/vendor/font-awesome/css/font-awesome.min.css" />" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
 </head>
+
 <body>
-<a href="<c:url value="/j_spring_security_logout"/>">Logout</a>
-<br/>
 
-<h1>Music List</h1>
+<div id="wrapper">
 
-<c:if test="${!empty listBooks}">
-    <table class="tg">
-        <tr>
-            <th width="80">ID</th>
-            <th width="120">Title</th>
-            <th width="120">Author</th>
-            <th width="120">Price</th>
-            <th width="60">Edit</th>
-            <th width="60">Delete</th>
-        </tr>
-        <c:forEach items="${listBooks}" var="book">
-            <tr>
-                <td>${book.id}</td>
-                <td>${book.bookTitle}</td>
-                <td>${book.bookAuthor}</td>
-                <td>${book.price/100}${book.price%100}</td>
-                <td><a href="<c:url value='admin/edit/${book.id}'/>">Edit</a></td>
-                <td><a href="<c:url value='admin/remove/${book.id}'/>">Delete</a></td>
-            </tr>
-        </c:forEach>
-    </table>
-</c:if>
-<br/>
-<a href="<c:url value='admin/add'/>">Add a Album</a>
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/list">Library</a>
+        </div>
+        <!-- /.navbar-header -->
+
+        <ul class="nav navbar-top-links navbar-right">
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                    <li><a href="<c:url value="/j_spring_security_logout"/>"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                    </li>
+                </ul>
+                <!-- /.dropdown-user -->
+            </li>
+            <!-- /.dropdown -->
+        </ul>
+        <!-- /.navbar-top-links -->
+
+        <div class="navbar-default sidebar" role="navigation">
+            <div class="sidebar-nav navbar-collapse">
+                <ul class="nav" id="side-menu">
+                    <li>
+                    <li>
+                        <a href="/list">Book Page</a>
+                    </li>
+                    <li>
+                        <a href="/admin/add">Add Book</a>
+                    </li>
+                    <li>
+                        <a href="/login">Login Page</a>
+                    </li>
+                    <!-- /.nav-second-level -->
+                    </li>
+                </ul>
+            </div>
+            <!-- /.sidebar-collapse -->
+        </div>
+        <!-- /.navbar-static-side -->
+    </nav>
+
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Book List</h1>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Book List
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                            <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Author</th>
+                                <th>Price</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            <c:forEach items="${listBooks}" var="book">
+                                <tr class="odd gradeX">
+                                    <td>${book.bookTitle}</td>
+                                    <td>${book.bookAuthor}</td>
+                                    <td>${book.price/100}${book.price%100}</td>
+                                    <td><a href="<c:url value='admin/edit/${book.id}'/>">Edit</a></td>
+                                    <td><a href="<c:url value='admin/remove/${book.id}'/>">Delete</a></td>
+
+
+                                </tr>
+                            </c:forEach>
+                            </tbody>
+                        </table>
+                        <!-- /.table-responsive -->
+                        <div class="well">
+                            <br/>
+                            <a class="btn btn-default btn-block" href="<c:url value='/admin/add'/>">Add a book</a>
+                        </div>
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+    </div>
+    <!-- /#page-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+
+<!-- jQuery -->
+<script src="/resources/vendor/jquery/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/resources/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+<!-- Metis Menu Plugin JavaScript -->
+<script src="/resources/vendor/metisMenu/metisMenu.min.js"></script>
+
+<!-- DataTables JavaScript -->
+<script src="/resources/vendor/datatables/js/jquery.dataTables.min.js"></script>
+<script src="/resources/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
+<script src="/resources/vendor/datatables-responsive/dataTables.responsive.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/resources/dist/js/sb-admin-2.js"></script>
+
+<!-- Page-Level Demo Scripts - Tables - Use for reference -->
+<script>
+    $(document).ready(function() {
+        $('#dataTables-example').DataTable({
+            responsive: true
+        });
+    });
+</script>
 
 </body>
+
 </html>
